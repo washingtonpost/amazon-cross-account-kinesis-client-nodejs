@@ -1,0 +1,8 @@
+kinesiscustomersample:
+    build: .
+    environment:
+      # arn:aws:iam::676590747184:user/kinesis-staging
+      AWS_ACCESS_KEY_ID: TBD
+      AWS_SECRET_ACCESS_KEY: TBD
+      AWS_ROLE_ARN: TBD
+      AWS_ROLE_SESSION_NAME: "kinesiscustomersample" # Must be greater than 2 characters.

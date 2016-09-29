@@ -1,0 +1,28 @@
+{
+  "name": "kinesis-customer-sample",
+  "version": "1.0.0",
+  "description": "Process Kinesis stream from another AWS account.",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://rgfindl@github.com/WPMedia/kinesis-customer-sample.git"
+  },
+  "keywords": [
+    "kinesis",
+    "assumerole",
+    "node"
+  ],
+  "author": "randy.findley@washpost.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/WPMedia/kinesis-customer-sample/issues"
+  },
+  "homepage": "https://github.com/WPMedia/kinesis-customer-sample#readme",
+  "dependencies": {
+    "aws-kcl": "^0.5.0",
+    "winston": "^2.2.0"
+  }
+}
