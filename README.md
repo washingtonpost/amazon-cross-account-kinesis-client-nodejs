@@ -21,7 +21,7 @@ In the AWS console create a DynomoDB table with "leaseKey" as the Primary key.
 ![DynamoDBSetup.png](DynamoDBSetup.png)
 
 ### Step 2 - ARC Customer
-Please tell us your AWS account id.  We need that in step 3.
+Please tell us your AWS account id.  We need this in step 3.
 
 ### Step 3 - The Washington Post
 We need to create an IAM User that you can assume.
@@ -29,7 +29,7 @@ We need to create an IAM User that you can assume.
 In the AWS console create a new IAM role.
 * Select "Role for Cross-Account Access"
 * Then "Allows IAM users from a 3rd party AWS account to access this account."
-* Add the Account ID only.  Don't add the External ID.
+* Add the Account ID only.  Don't add the External ID, this is not supported by the AWS Kinesis Client yet.
 
 ![RoleType.png](RoleType.png)
 ![AccountId.png](AccountId.png)
@@ -108,6 +108,8 @@ Use the DynamoDB table name to populate the "applicationName" found in [properti
 
 Use the Kinesis stream name to populate the "streamName" found in [properties/kcl.properties](properties/kcl.propertis).
 
+Use the IAM Role to populate the "AWS_ROLE_ARN" found in [docker-compose.yml](docker-compose.yml).
+
 Create an IAM user in your account that can assume the IAM role in The Washington Post account.
 
 After creating the IAM user attach a policy that grants access to the Securty Token Service.  Use the role ARN The Washington Post provided as the Resource.
@@ -132,4 +134,5 @@ Example policy:
 }
 ```
 
-Now use your IAM user credentials populate the AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY found in [docker-compose.yml](docker-compose.yml).
+Now use your IAM user credentials to populate the AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY found in [docker-compose.yml](docker-compose.yml).
+
