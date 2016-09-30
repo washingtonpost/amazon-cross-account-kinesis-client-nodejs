@@ -12,18 +12,10 @@ This Kinesis stream is populated with the following information:
 * [Videos](https://github.com/washingtonpost/ans-schema/blob/master/src/main/resources/schema/ans/0.5.7/video_operation.json)
 
 ## Setup
-### Step 1 - The Washington Post
-We need to create a DynamoDB table.
+### Step 1 - ARC Customer
+Please tell us your AWS account id.  We need this in step 2.
 
-The name of the table has to match the "applicationName" found in [properties/kcl.properties](properties/kcl.propertis).  So pick an applicationName, create the DynamoDB table, and let the customer know what it is.
-
-In the AWS console create a DynomoDB table with "leaseKey" as the Primary key.
-![DynamoDBSetup.png](DynamoDBSetup.png)
-
-### Step 2 - ARC Customer
-Please tell us your AWS account id.  We need this in step 3.
-
-### Step 3 - The Washington Post
+### Step 2 - The Washington Post
 We need to create an IAM User that you can assume.
 
 In the AWS console create a new IAM role.
@@ -70,41 +62,13 @@ Policy
             "Resource": [
                 "arn:aws:kinesis:us-east-1:397853141546:stream/com.arcpublishing.staging.content.ans"
             ]
-        },
-        {
-            "Sid": "Stmt1475084967000",
-            "Effect": "Allow",
-            "Action": [
-                "dynamodb:CreateTable",
-                "dynamodb:DescribeTable",
-                "dynamodb:DeleteItem",
-                "dynamodb:GetItem",
-                "dynamodb:PutItem",
-                "dynamodb:Scan",
-                "dynamodb:UpdateItem"
-            ],
-            "Resource": [
-                "arn:aws:dynamodb:us-east-1:397853141546:table/kinesis-customer-sample"
-            ]
-        },
-        {
-            "Sid": "Stmt1475085048000",
-            "Effect": "Allow",
-            "Action": [
-                "cloudwatch:PutMetricData"
-            ],
-            "Resource": [
-                "*"
-            ]
         }
     ]
 }
 ```
 
 ### Step 3 - ARC Customer
-Get the DynamoDB table name, IAM Role ARN, and Kinesis stream name from The Washington Post.
-
-Use the DynamoDB table name to populate the "applicationName" found in [properties/kcl.properties](properties/kcl.propertis).
+Get the IAM Role ARN and Kinesis stream name from The Washington Post.
 
 Use the Kinesis stream name to populate the "streamName" found in [properties/kcl.properties](properties/kcl.propertis).
 
@@ -129,10 +93,55 @@ Example policy:
             "Resource": [
                 "arn:aws:iam::397853141546:role/kinesis-staging-external"
             ]
-        }
+        },
+         {
+             "Sid": "Stmt1475084967000",
+             "Effect": "Allow",
+             "Action": [
+                 "dynamodb:CreateTable",
+                 "dynamodb:DescribeTable",
+                 "dynamodb:DeleteItem",
+                 "dynamodb:GetItem",
+                 "dynamodb:PutItem",
+                 "dynamodb:Scan",
+                 "dynamodb:UpdateItem"
+             ],
+             "Resource": [
+                 "*"
+             ]
+         },
+         {
+             "Sid": "Stmt1475085048000",
+             "Effect": "Allow",
+             "Action": [
+                 "cloudwatch:PutMetricData"
+             ],
+             "Resource": [
+                 "*"
+             ]
+         }
     ]
 }
 ```
 
 Now use your IAM user credentials to populate the AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY found in [docker-compose.yml](docker-compose.yml).
 
+## Run Sample
+Install and setup [Docker Comopse](https://docs.docker.com/compose/).
+
+Run the following commands to build and run this docker container.
+```
+docker-compose build
+docker-compose up
+```
+
+### Reading the node.js logs
+To execute bash commands on your running docker container you can do the following:
+```
+docker ps   # to determine the container id.
+docker exec -t -i mycontainer /bin/bash
+```
+Then you can view the node.js logs via this command:
+```
+tail -f logs/application.log
+```

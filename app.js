@@ -6,15 +6,11 @@ var zlib = require('zlib');
 //
 // Logging setup
 //
-winston.remove(winston.transports.Console);
-winston.add(winston.transports.Console, {
-  stderrLevels: [],
-  handleExceptions: true,
-  humanReadableUnhandledException: true,
-  timestamp: true
-});
-
+winston.add(winston.transports.File, { filename: './logs/application.log' });
+winston.remove(winston.transports.Console); // Remove console logger because the Amazon KCL for Node.js uses stdin/stdout to interact with MultiLangDaemon.
 winston.level = 'debug';
+
+winston.info('app.js start');
 
 /**
  * The record processor must provide three functions:
@@ -94,9 +90,9 @@ var recordProcessor = {
       // Custom record processing logic ...
       zlib.unzip(new Buffer(record.data, 'base64'), function(err, data) {
         if (!err) {
-          console.log('Decoded payload:', data.toString());
+          winston.debug('Decoded payload:', data.toString());
         } else {
-          console.log(err);
+          winston.error(err);
         }
       });
     }
