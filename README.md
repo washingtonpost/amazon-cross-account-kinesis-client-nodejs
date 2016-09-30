@@ -26,7 +26,7 @@ In the AWS console create a new IAM role.
 ![RoleType.png](RoleType.png)
 ![AccountId.png](AccountId.png)
 
-Use this as an example policy.  It uses the ARN from the Kinesis stream and the DynamoDB table.
+Use this as an example policy.  It uses the ARN from the Kinesis stream.
 
 Example: arn:aws:iam::397853141546:role/kinesis-staging-external
 
