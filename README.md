@@ -127,7 +127,7 @@ Example policy:
 Now use your IAM user credentials to populate the AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY found in [docker-compose.yml](docker-compose.yml).
 
 ## Run Sample
-Install and setup [Docker Comopse](https://docs.docker.com/compose/).
+Install and setup [Docker Compose](https://docs.docker.com/compose/).
 
 Run the following commands to build and run this docker container.
 ```
