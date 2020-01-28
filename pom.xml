@@ -12,13 +12,13 @@
         <dependency>
             <groupId>com.amazonaws</groupId>
             <artifactId>aws-java-sdk</artifactId>
-            <version>1.7.13</version>
+            <version>1.11.438</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/com.amazonaws/amazon-kinesis-client -->
         <dependency>
             <groupId>com.amazonaws</groupId>
             <artifactId>amazon-kinesis-client</artifactId>
-            <version>1.2.0</version>
+            <version>1.9.3</version>
         </dependency>
     </dependencies>
 

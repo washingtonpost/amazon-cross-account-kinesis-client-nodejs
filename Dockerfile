@@ -1,11 +1,10 @@
-FROM    openjdk:8-jdk
+FROM openjdk:8-jdk
 
 # Install Node.js and npm
 RUN apt-get update
-RUN apt-get install -y curl nodejs npm maven
-RUN npm install -g n
-RUN n latest
-RUN ln -s "$(which nodejs)" /usr/bin/node
+RUN apt-get install -y curl
+RUN curl -sL https://deb.nodesource.com/setup_12.x | bash -
+RUN apt-get install -y nodejs npm maven
 
 # Install app dependencies
 RUN mkdir /src
@@ -15,6 +14,7 @@ WORKDIR /src
 COPY . /src
 RUN rm -rf /src/node_modules
 RUN npm install
+COPY kcl-bootstrap node_modules/aws-kcl/bin/kcl-bootstrap
 
 RUN mvn install
 
