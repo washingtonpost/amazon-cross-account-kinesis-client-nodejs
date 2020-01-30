@@ -1,28 +1,28 @@
 {
-  "name": "kinesis-customer-sample",
-  "version": "1.0.0",
+  "name": "kinesis-customer-sample-nodejs",
+  "version": "2.0.0",
   "description": "Process Kinesis stream from another AWS account.",
   "main": "index.js",
-  "scripts": {
-    "test": "mocha"
-  },
   "repository": {
     "type": "git",
-    "url": "git+https://rgfindl@github.com/WPMedia/kinesis-customer-sample.git"
+    "url": "git@github.com:washingtonpost/amazon-cross-account-kinesis-client-nodejs.git"
   },
   "keywords": [
     "kinesis",
     "assumerole",
     "node"
   ],
-  "author": "randy.findley@washpost.com",
+  "author": {
+    "name": "ARC Publishing",
+    "url": "https://www.arcpublishing.com/"
+  },
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/WPMedia/kinesis-customer-sample/issues"
+    "url": "https://github.com/washingtonpost/amazon-cross-account-kinesis-client-nodejs/issues"
   },
-  "homepage": "https://github.com/WPMedia/kinesis-customer-sample#readme",
+  "homepage": "https://github.com/washingtonpost/amazon-cross-account-kinesis-client-nodejs",
   "dependencies": {
-    "aws-kcl": "^0.8.0",
-    "winston": "^2.2.0"
+    "aws-kcl": "^2.0.0",
+    "winston": "^2.4.4"
   }
 }

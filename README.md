@@ -57,10 +57,24 @@ Policy
             "Action": [
                 "kinesis:DescribeStream",
                 "kinesis:GetShardIterator",
-                "kinesis:GetRecords"
+                "kinesis:GetRecords",
+                "kinesis:DescribeStreamSummary",
+                "kinesis:ListShards",
+                "kinesis:RegisterStreamConsumer"
             ],
             "Resource": [
                 "arn:aws:kinesis:us-east-1:397853141546:stream/com.arcpublishing.staging.content.ans"
+            ]
+        },
+        {
+            "Sid": "Stmt1580426436855",
+            "Effect": "Allow",
+            "Action": [
+                "kinesis:SubscribeToShard",
+                "kinesis:DescribeStreamConsumer"
+            ],
+            "Resource": [
+                "arn:aws:kinesis:us-east-1:397853141546:stream/com.arcpublishing.staging.content.ans/consumer/*"
             ]
         }
     ]
@@ -68,11 +82,13 @@ Policy
 ```
 
 ### Step 3 - ARC Customer
-Get the IAM Role ARN and Kinesis stream name from The Washington Post.
+Get the IAM Role ARN, Kinesis stream name, and AWS region from The Washington Post.
 
-Use the Kinesis stream name to populate the "streamName" found in [properties/kcl.properties](properties/kcl.propertis).
+Use the Kinesis stream name to update the "streamName" found in [properties/kcl.properties](properties/kcl.propertis).
 
-Use the IAM Role to populate the "AWS_ROLE_ARN" found in [docker-compose.yml](docker-compose.yml).
+Use the IAM Role to update the "AWSCredentialsProvider" found in [properties/kcl.properties](properties/kcl.propertis).
+
+Use the AWS region to update the "regionName" found in [properties/kcl.properties](properties/kcl.propertis).
 
 Create an IAM user in your account that can assume the IAM role in The Washington Post account.
 
@@ -136,12 +152,7 @@ docker-compose up
 ```
 
 ### Reading the node.js logs
-To execute bash commands on your running docker container you can do the following:
-```
-docker ps   # to determine the container id.
-docker exec -t -i mycontainer /bin/bash
-```
-Then you can view the node.js logs via this command:
+You can view the node.js logs via this command:
 ```
 tail -f logs/application.log
 ```
